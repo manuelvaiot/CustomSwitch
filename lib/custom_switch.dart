@@ -6,22 +6,10 @@ class CustomSwitch extends StatefulWidget {
   final bool value;
   final ValueChanged<bool> onChanged;
   final Color activeColor;
-  final Color inactiveColor = Colors.grey;
-  final String activeText = 'On';
-  final String inactiveText = 'Off';
-  final Color activeTextColor = Colors.white70;
-  final Color inactiveTextColor = Colors.white70;
+  final double width;
+  final double height;
 
-  const CustomSwitch({
-    Key key, 
-    this.value, 
-    this.onChanged, 
-    this.activeColor, 
-    this.inactiveColor, 
-    this.activeText,
-    this.inactiveText,
-    this.activeTextColor,
-    this.inactiveTextColor})
+  const CustomSwitch({Key key, this.value, this.onChanged, this.activeColor, this.width, this.height})
       : super(key: key);
 
   @override
@@ -62,16 +50,15 @@ class _CustomSwitchState extends State<CustomSwitch>
                 : widget.onChanged(false);
           },
           child: Container(
-            width: 70.0,
-            height: 35.0,
+            width: widget.width,
+            height: widget.height,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20.0),
                 color: _circleAnimation.value == Alignment.centerLeft
-                    ? widget.inactiveColor
+                    ? Colors.grey
                     : widget.activeColor),
             child: Padding(
-              padding: const EdgeInsets.only(
-                  top: 4.0, bottom: 4.0, right: 4.0, left: 4.0),
+              padding: const EdgeInsets.all(2.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -79,32 +66,32 @@ class _CustomSwitchState extends State<CustomSwitch>
                       ? Padding(
                           padding: const EdgeInsets.only(left: 4.0, right: 4.0),
                           child: Text(
-                            widget.activeText,
+                            'On',
                             style: TextStyle(
-                                color: widget.activeTextColor,
+                                color: Colors.white70,
                                 fontWeight: FontWeight.w900,
-                                fontSize: 16.0),
+                                fontSize: 12.0),
                           ),
                         )
                       : Container(),
                   Align(
                     alignment: _circleAnimation.value,
                     child: Container(
-                      width: 25.0,
-                      height: 25.0,
+                      width: 12.5,
+                      height: 12.5,
                       decoration: BoxDecoration(
                           shape: BoxShape.circle, color: Colors.white),
                     ),
                   ),
                   _circleAnimation.value == Alignment.centerLeft
                       ? Padding(
-                          padding: const EdgeInsets.only(left: 4.0, right: 5.0),
+                          padding: const EdgeInsets.only(left: 4.0, right: 4.0),
                           child: Text(
-                            widget.inactiveText,
+                            'Off',
                             style: TextStyle(
-                                color: widget.inactiveTextColor,
+                                color: Colors.white70,
                                 fontWeight: FontWeight.w900,
-                                fontSize: 16.0),
+                                fontSize: 12.0),
                           ),
                         )
                       : Container(),
